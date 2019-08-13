@@ -1,0 +1,17 @@
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\bin\Debug\netcoreapp2.2\WebApi.Tests.deps.json
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\bin\Debug\netcoreapp2.2\WebApi.Tests.runtimeconfig.json
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\bin\Debug\netcoreapp2.2\WebApi.Tests.runtimeconfig.dev.json
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\bin\Debug\netcoreapp2.2\WebApi.Tests.dll
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\bin\Debug\netcoreapp2.2\WebApi.dll
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\bin\Debug\netcoreapp2.2\WebApi.pdb
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\obj\Debug\netcoreapp2.2\WebApi.Tests.csprojAssemblyReference.cache
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\obj\Debug\netcoreapp2.2\WebApi.Tests.csproj.CoreCompileInputs.cache
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\obj\Debug\netcoreapp2.2\WebApi.Tests.AssemblyInfoInputs.cache
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\obj\Debug\netcoreapp2.2\WebApi.Tests.AssemblyInfo.cs
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\obj\Debug\netcoreapp2.2\WebApi.Tests.csproj.CopyComplete
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\bin\Debug\netcoreapp2.2\WebApi.Tests.pdb
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\obj\Debug\netcoreapp2.2\WebApi.Tests.dll
+C:\Sundesh\Training\Week 4\13.08.2019\SampleWebApi\WebApi.Tests\obj\Debug\netcoreapp2.2\WebApi.Tests.pdb
