@@ -32,10 +32,11 @@ pipeline{
                 sh "echo '================= Build Project Completed ==================='"
             }
         }
-        post{
+    }
+            post{
             always{
                 echo "I am in post"
             }
         }
-    }
+
 }
