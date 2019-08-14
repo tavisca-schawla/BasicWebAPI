@@ -1,6 +1,10 @@
 pipeline{
     agent any
-    
+
+    parameters {
+        choice(name:'RELEASE-ENV', choices: ['Build','Test'], description: '')
+    }
+
     environment{
         GIT_PATH = 'https://github.com/tavisca-schawla/BasicWebAPI.git'
         SOLUTION_FILE_PATH = 'SampleWebApi.sln'
