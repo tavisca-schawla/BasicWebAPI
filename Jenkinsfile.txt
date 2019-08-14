@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     parameters {
-        choice(name:'RELEASE-ENV', choices: ['Build','Test'], description: '')
+        choice(name:'RELEASE_ENV', choices: ['Build','Test'], description: '')
     }
 
     environment{
@@ -20,7 +20,7 @@ pipeline{
         }
         stage('build'){
             when{
-                environment name:'RELEASE-ENV', value:'Build'
+                environment name:'RELEASE_ENV', value:'Build'
             }
             steps{
                 sh "echo '================= Build Project Started ====================='"
@@ -30,7 +30,7 @@ pipeline{
         }
         stage('test'){
             when{
-                environment name:'RELEASE-ENV', value:'Test'
+                environment name:'RELEASE_ENV', value:'Test'
             }
 
             environment{
