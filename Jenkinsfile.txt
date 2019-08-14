@@ -2,34 +2,34 @@ pipeline{
     agent any
     
     environment{
-        GIT_PATH = "https://github.com/tavisca-schawla/BasicWebAPI.git"
-        SOLUTION_FILE_PATH = "SampleWebApi.sln"
-        TEST_PROJECT_PATH = "WebApi.Tests/WebApi.Tests.csproj"
+        GIT_PATH = 'https://github.com/tavisca-schawla/BasicWebAPI.git'
+        SOLUTION_FILE_PATH = 'SampleWebApi.sln'
+        TEST_PROJECT_PATH = 'WebApi.Tests/WebApi.Tests.csproj'
     }
     stages{
         stage('restore'){
             steps{
-                sh echo '================= Build Project Started ====================='
-                sh dotnet restore $SOLUTION_FILE_PATH --source https://api.nuget.org/v3/index.json
-                sh echo '================= Build Project Completed ==================='
+                sh "echo '================= Build Project Started ====================='"
+                sh "dotnet restore $SOLUTION_FILE_PATH --source https://api.nuget.org/v3/index.json"
+                sh "echo '================= Build Project Completed ==================='"
             }
         }
         stage('build'){
             steps{
-                sh echo '================= Build Project Started ====================='
-                sh dotnet build $SOLUTION_FILE_PATH -p:Configuration=release -v:n
-                sh echo '================= Build Project Completed ==================='
+                sh "echo '================= Build Project Started ====================='"
+                sh "dotnet build $SOLUTION_FILE_PATH -p:Configuration=release -v:n"
+                sh "echo '================= Build Project Completed ==================='"
             }
         }
         stage('test'){
             environment{
-               TEST_PROJECT_PATH = "WebApi.Tests/WebApi.Tests.csproj"
+               TEST_PROJECT_PATH = 'WebApi.Tests/WebApi.Tests.csproj'
             }
 
             steps{
-                sh echo '================= Build Project Started ====================='
-                sh dotnet test $TEST_PROJECT_PATH
-                sh echo '================= Build Project Completed ==================='
+                sh "echo '================= Build Project Started ====================='"
+                sh "dotnet test $TEST_PROJECT_PATH"
+                sh "echo '================= Build Project Completed ==================='"
             }
         }
         post{
