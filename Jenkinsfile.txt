@@ -7,7 +7,7 @@ pipeline{
         TEST_PROJECT_PATH = 'WebApi.Tests/WebApi.Tests.csproj'
     }
     stages{
-        stage('restore'){
+        stage('restore'){            
             steps{
                 sh "echo '================= Build Project Started ====================='"
                 sh "dotnet restore $SOLUTION_FILE_PATH --source https://api.nuget.org/v3/index.json"
@@ -15,6 +15,9 @@ pipeline{
             }
         }
         stage('build'){
+            when{
+                environment name:'RELEASE-ENV', value:'Build'
+            }
             steps{
                 sh "echo '================= Build Project Started ====================='"
                 sh "dotnet build $SOLUTION_FILE_PATH -p:Configuration=release -v:n"
@@ -22,6 +25,10 @@ pipeline{
             }
         }
         stage('test'){
+            when{
+                environment name:'RELEASE-ENV', value:'Test'
+            }
+
             environment{
                TEST_PROJECT_PATH = 'WebApi.Tests/WebApi.Tests.csproj'
             }
@@ -33,10 +40,10 @@ pipeline{
             }
         }
     }
-            post{
-            always{
-                echo "I am in post"
-            }
-        }
 
+    post{
+        always{
+                echo "I am in post"
+        }
+    }
 }
