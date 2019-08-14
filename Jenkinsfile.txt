@@ -20,7 +20,7 @@ pipeline{
         }
         stage('build'){
             when{
-                expression{ "${RELEASE_ENV}" == 'Build' }
+                expression{ params.RELEASE_ENV == 'Build' }
             }
             steps{
                 sh "echo '================= Build Project Started ====================='"
@@ -30,7 +30,7 @@ pipeline{
         }
         stage('test'){
             when{
-                expression{ "${RELEASE_ENV}" == 'Test' }
+                expression{ params.RELEASE_ENV == 'Test' }
             }
 
             environment{
