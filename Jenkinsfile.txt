@@ -20,7 +20,7 @@ pipeline{
         }
         stage('build'){
             when{
-                environment name:'RELEASE_ENV', value:'Build'
+                params.RELEASE_ENV == 'Build'
             }
             steps{
                 sh "echo '================= Build Project Started ====================='"
@@ -30,7 +30,7 @@ pipeline{
         }
         stage('test'){
             when{
-                environment name:'RELEASE_ENV', value:'Test'
+                params.RELEASE_ENV == 'Test'
             }
 
             environment{
