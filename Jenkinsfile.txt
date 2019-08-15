@@ -47,7 +47,8 @@ pipeline{
 
     post{
         always{
-                echo "I am in post"
+            archiveArtifacts artifacts: '*.dll', onlyIfSuccessfull: true
+            
         }
     }
 }
