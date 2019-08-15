@@ -47,7 +47,7 @@ pipeline{
 
     post{
         always{
-            archiveArtifacts artifacts: 'WebApi/bin/Debug/netcoreapp2.2/*.dll', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'DemoApplication/bin/Debug/netcoreapp2.2/*.dll', onlyIfSuccessful: true
             
         }
     }
