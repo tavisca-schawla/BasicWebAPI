@@ -49,7 +49,7 @@
 
                 steps{
                     powershell "echo '================= Build Project Started ====================='"
-                    powershell 'dotnet WebApi/bin/Release/netcoreapp2.2/DemoApplication.dll'
+                    powershell "dotnet WebApi/bin/Release/netcoreapp2.2/DemoApplication.dll"
                     powershell "echo '================= Build Project Completed ==================='"
                 }
             }
