@@ -42,24 +42,13 @@
                     powershell "dotnet test $TEST_PROJECT_PATH"
                     powershell "echo '================= Build Project Completed ==================='"
                 }
-            }
-
-            stage('deploy'){
-                
-
-                steps{
-                    powershell "echo '================= Build Project Started ====================='"
-                    powershell "dotnet WebApi/bin/Release/netcoreapp2.2/DemoApplication.dll"
-                    powershell "echo '================= Build Project Completed ==================='"
-                }
-            }
-
+            }            
         }
 
         post{
             always{
                 archiveArtifacts artifacts: 'WebApi/bin/Debug/netcoreapp2.2/*.dll', onlyIfSuccessful: true
-                
+                zip zipFile: 'result.zip' dir: 'WebApi/bin/Debug/netcoreapp2.2'
             }
         }
     }
