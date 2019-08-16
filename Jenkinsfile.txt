@@ -47,9 +47,13 @@
 
         post{
             always{
-                archiveArtifacts artifacts: 'result.zip', onlyIfSuccessful: true
-                zip zipFile: 'result.zip', archive: false, dir: 'WebApi/bin/Release/netcoreapp2.2'
-		deleteDir() 
+                dir('result.zip'){
+			deleteDir() 
+		}
+		zip zipFile: 'result.zip', archive: false, dir: 'WebApi/bin/Release/netcoreapp2.2'
+		archiveArtifacts artifacts: 'result.zip', onlyIfSuccessful: true
+                
+		
             }
         }
     }
