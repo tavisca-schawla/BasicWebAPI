@@ -48,7 +48,7 @@
         post{
             always{
                 archiveArtifacts artifacts: 'WebApi/bin/Debug/netcoreapp2.2/*.dll', onlyIfSuccessful: true
-                zip zipFile: 'result.zip' dir: 'WebApi/bin/Debug/netcoreapp2.2'
+                zip zipFile: 'result.zip', archive: false, dir: 'WebApi/bin/Debug/netcoreapp2.2'
             }
         }
     }
