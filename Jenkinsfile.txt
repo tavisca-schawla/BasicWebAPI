@@ -37,6 +37,10 @@
             stage('Deploy')
             {
                 steps{
+                    powershell "docker build WebApi/bin/Debug/netcoreapp2.2/publish/ --tag=a"
+                    powershell "docker tag dummydockerepo:${BUILD_NUMBER} sunchawla/dummydockerepo:${BUILD_NUMBER}"
+                    powershell "docker push sunchawla/dummydockerepo:${BUILD_NUMBER}"
+
                 }
             }
         }
