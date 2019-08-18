@@ -1,7 +1,7 @@
 pipeline{
     agent { label 'master' }
     environment {
-        registry = "dshrivastav/httpapplication"
+        registry = "sunchawla/demodockerepo"
         registryCredential = "docker"
     }
 
