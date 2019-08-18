@@ -10,7 +10,7 @@
             SOLUTION_FILE_PATH = 'SampleWebApi.sln'
             TEST_PROJECT_PATH = 'WebApi.Tests/WebApi.Tests.csproj'
             registry = "sunchawla/demodockerepo"
-            registryCredential = ‘dockerhub’
+            registryCredential = 'dockerhub'
             dockerImage = ''
         }
         stages{
