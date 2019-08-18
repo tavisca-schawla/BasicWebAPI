@@ -7,16 +7,9 @@ pipeline{
         TEST_PROJECT_PATH = 'WebApi.Tests/WebApi.Tests.csproj'
         registry = "sunchawla/demodockerepo"
         registryCredential = 'docker'
-        dockerImage = ''
         PROJECT_PATH = "WebApi/WebApi.csproj"        
     }
 
-    parameters{
-         string(
-            name: "DOCKERFILE",
-            defaultValue: "mcr.microsoft.com/dotnet/core/aspnet",
-        )
-    }
     stages{
             stage('Build'){
                     steps{
@@ -37,6 +30,7 @@ pipeline{
                         powershell "echo '================= Publish Project Completed ==================='"                    
                     }
             }        
+
             stage ('Deploy') {
                 steps {
                     writeFile file: 'WebApi/bin/Debug/netcoreapp2.2/publish/Dockerfile', text: '''
@@ -44,12 +38,14 @@ pipeline{
                         ENV NAME webapi\n
                         CMD ["dotnet", "WebApi.dll"]\n'''
                 
+                powershell "docker login -u sunchawla -p 1nt3gRITY"
                 powershell "docker build WebApi/bin/Debug/netcoreapp2.2/publish/ --tag=webapi:${BUILD_NUMBER}"    
                 powershell "docker tag webapi:${BUILD_NUMBER} sunchawla/webapi:${BUILD_NUMBER}"
                 powershell "docker push sunchawla/webapi:${BUILD_NUMBER}"
             }
         }
     }
+
 	post{
         always{
             deleteDir()
