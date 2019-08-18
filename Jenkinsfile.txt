@@ -28,14 +28,22 @@
                         powershell "dotnet test $TEST_PROJECT_PATH"
                         powershell "echo '================= Test Project Completed ==================='"                    
 
-                        script {
-                            dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                        }
+                        powershell "echo '================= Publish Project Started ====================='"
+                        powershell "dotnet publish $TEST_PROJECT_PATH"
+                        powershell "echo '================= Publish Project Completed ==================='"                    
+
+                        //script {
+                          //  dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                        //}
                     }
             }
 
             stage('Deploy')
             {
+                powershell '''
+                    docker --tag= "abc"
+                    docker build $registry
+                '''
                 steps{
                     script {
                         docker.withRegistry( '', registryCredential ) {
