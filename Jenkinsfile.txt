@@ -12,6 +12,8 @@
             registry = "sunchawla/demodockerepo"
             registryCredential = 'dockerhub'
             dockerImage = ''
+            PROJECT_PATH = "WebApi/WebApi.csproj"
+        )
         }
         stages{
             stage('Build'){
@@ -29,7 +31,7 @@
                         powershell "echo '================= Test Project Completed ==================='"                    
 
                         powershell "echo '================= Publish Project Started ====================='"
-                        powershell "dotnet publish $TEST_PROJECT_PATH"
+                        powershell "dotnet publish $PROJECT_PATH"
                         powershell "echo '================= Publish Project Completed ==================='"                    
                     }
             }
@@ -37,9 +39,14 @@
             stage('Deploy')
             {
                 steps{
+                    writeFile file: 'WebApi/bin/Debug/netcoreapp2.2/publish/Dockerfile', text: '''
+                        FROM mcr.microsoft.com/dotnet/core/aspnet\n
+                        ENV NAME dockerrepo\n
+                        CMD ["dotnet", "${SOLUTION_DLL_FILE}"]\n'''
+                        
                     powershell "docker build WebApi/bin/Debug/netcoreapp2.2/publish/ --tag=a"
-                    powershell "docker tag dummydockerepo:${BUILD_NUMBER} sunchawla/dummydockerepo:${BUILD_NUMBER}"
-                    powershell "docker push sunchawla/dummydockerepo:${BUILD_NUMBER}"
+                    powershell "docker tag demodockerepo:${BUILD_NUMBER} sunchawla/demodockerepo:${BUILD_NUMBER}"
+                    powershell "docker push sunchawla/demodockerepo:${BUILD_NUMBER}"
 
                 }
             }
