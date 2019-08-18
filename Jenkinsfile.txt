@@ -9,51 +9,70 @@
             GIT_PATH = 'https://github.com/tavisca-schawla/BasicWebAPI.git'
             SOLUTION_FILE_PATH = 'SampleWebApi.sln'
             TEST_PROJECT_PATH = 'WebApi.Tests/WebApi.Tests.csproj'
+            registry = "sunchawla/demodockerepo"
+            registryCredential = ‘dockerhub’
+            dockerImage = ''
         }
         stages{
-            stage('restore'){            
-                steps{
-                    powershell "echo '================= Build Project Started ====================='"
-                    powershell "dotnet restore $SOLUTION_FILE_PATH --source https://api.nuget.org/v3/index.json"
-                    powershell "echo '================= Build Project Completed ==================='"
+            stage('Build'){
+                stage('restore'){            
+                    steps{
+                        powershell "echo '================= Build Project Started ====================='"
+                        powershell "dotnet restore $SOLUTION_FILE_PATH --source https://api.nuget.org/v3/index.json"
+                        powershell "echo '================= Build Project Completed ==================='"
+                    }
                 }
-            }
-            stage('build'){
-                when{
-                    expression{ params.RELEASE_ENV == 'Build' }
+                stage('build'){
+                    when{
+                        expression{ params.RELEASE_ENV == 'Build' }
+                    }
+                    steps{
+                        powershell "echo '================= Build Project Started ====================='"
+                        powershell "dotnet build $SOLUTION_FILE_PATH -p:Configuration=release -v:n"
+                        powershell "echo '================= Build Project Completed ==================='"
+                    }
                 }
-                steps{
-                    powershell "echo '================= Build Project Started ====================='"
-                    powershell "dotnet build $SOLUTION_FILE_PATH -p:Configuration=release -v:n"
-                    powershell "echo '================= Build Project Completed ==================='"
-                }
-            }
-            stage('test'){
-                when{
-                    expression{ params.RELEASE_ENV == 'Test' }
+                stage('test'){
+                    when{
+                        expression{ params.RELEASE_ENV == 'Test' }
+                    }
+
+                    environment{
+                    TEST_PROJECT_PATH = 'WebApi.Tests/WebApi.Tests.csproj'
+                    }
+
+                    steps{
+                        powershell "echo '================= Build Project Started ====================='"
+                        powershell "dotnet test $TEST_PROJECT_PATH"
+                        powershell "echo '================= Build Project Completed ==================='"
+                    }
                 }
 
-                environment{
-                TEST_PROJECT_PATH = 'WebApi.Tests/WebApi.Tests.csproj'
+                stage('build artifact'){
+                    steps{
+                        script {
+                            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                        }
+                    }
                 }
+            }
 
+            stage('Deploy')
+            {
                 steps{
-                    powershell "echo '================= Build Project Started ====================='"
-                    powershell "dotnet test $TEST_PROJECT_PATH"
-                    powershell "echo '================= Build Project Completed ==================='"
+                    script {
+                        docker.withRegistry( '', registryCredential ) {
+                            dockerImage.push()
+                        }
+                    }
                 }
-            }            
+            }
         }
 
         post{
             always{
-                dir('result.zip'){
-			deleteDir() 
-		}
-		zip zipFile: 'result.zip', archive: false, dir: 'WebApi/bin/Release/netcoreapp2.2'
-		archiveArtifacts artifacts: 'result.zip', onlyIfSuccessful: true
-                
-		
-            }
+        		deleteDir() 
+                powershell "docker rmi $registry:$BUILD_NUMBER"
+    		}
         }
     }
