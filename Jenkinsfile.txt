@@ -12,8 +12,7 @@
             registry = "sunchawla/demodockerepo"
             registryCredential = 'dockerhub'
             dockerImage = ''
-            PROJECT_PATH = "WebApi/WebApi.csproj"
-        )
+            PROJECT_PATH = "WebApi/WebApi.csproj"        
         }
         stages{
             stage('Build'){
