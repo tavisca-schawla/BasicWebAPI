@@ -19,9 +19,9 @@ pipeline{
                             echo '================= Restore Project Completed ==================='
 
 			                echo '================= Build Project With Sonar Started ====================='
-                            dotnet C:\Sundesh\Training\Week 4\sonar for ms build\SonarScanner.MSBuild.dll begin /k:"webapiproject" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
+                            dotnet dotnet-sonarscanner begin /k:"webapiproject" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
             			    dotnet build $SOLUTION_FILE_PATH
-            			    dotnet C:\Sundesh\Training\Week 4\sonar for ms build\SonarScanner.MSBuild.dll end /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
+            			    dotnet dotnet-sonarscanner end /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
                             echo '================= Build Project With Sonar Completed ==================='
 
 
