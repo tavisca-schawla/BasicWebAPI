@@ -13,28 +13,30 @@ pipeline{
     stages{
             stage('Build'){
                     steps{
-                        powershell "echo '================= Restore Project Started ====================='"
-                        powershell "dotnet restore $SOLUTION_FILE_PATH --source https://api.nuget.org/v3/index.json"
-                        powershell "echo '================= Restore Project Completed ==================='"
+                        powershell '''
+                            echo '================= Restore Project Started ====================='
+                            dotnet restore $SOLUTION_FILE_PATH --source https://api.nuget.org/v3/index.json
+                            echo '================= Restore Project Completed ==================='
 
-			powershell "echo '================= Build Project With Sonar Started ====================='"
-                        powershell "dotnet $install_directory/SonarScanner.MSBuild.dll begin /k:"webapiproject" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
-			powershell "dotnet build $SOLUTION_FILE_PATH"
-			powershell "dotnet $install_directory/SonarScanner.MSBuild.dll end /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5""
-                        powershell "echo '================= Build Project With Sonar Completed ==================='"
+			                echo '================= Build Project With Sonar Started ====================='
+                            dotnet $install_directory/SonarScanner.MSBuild.dll begin /k:"webapiproject" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
+            			    dotnet build $SOLUTION_FILE_PATH
+            			    dotnet $install_directory/SonarScanner.MSBuild.dll end /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
+                            echo '================= Build Project With Sonar Completed ==================='
 
 
-                        powershell "echo '================= Build Project Started ====================='"
-                        powershell "dotnet build $SOLUTION_FILE_PATH -p:Configuration=release -v:n"
-                        powershell "echo '================= Build Project Completed ==================='"
+                            echo '================= Build Project Started ====================='
+                            dotnet build $SOLUTION_FILE_PATH -p:Configuration=release -v:n
+                            echo '================= Build Project Completed ==================='
 
-                        powershell "echo '================= Test Project Started ====================='"
-                        powershell "dotnet test $TEST_PROJECT_PATH"
-                        powershell "echo '================= Test Project Completed ==================='"                    
+                            echo '================= Test Project Started ====================='
+                            dotnet test $TEST_PROJECT_PATH
+                            echo '================= Test Project Completed ==================='
 
-                        powershell "echo '================= Publish Project Started ====================='"
-                        powershell "dotnet publish $PROJECT_PATH"
-                        powershell "echo '================= Publish Project Completed ==================='"                    
+                            echo '================= Publish Project Started ====================='
+                            dotnet publish $PROJECT_PATH
+                            echo '================= Publish Project Completed ==================='
+                        '''
                     }
             }        
 
