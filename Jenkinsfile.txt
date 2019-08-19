@@ -21,7 +21,7 @@ pipeline{
 			                echo '================= Build Project With Sonar Started ====================='
                             dotnet dotnet-sonarscanner begin /k:"webapiproject" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
             			    dotnet build $SOLUTION_FILE_PATH
-            			    dotnet dotnet-sonarscanner end /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
+            			    dotnet-sonarscanner end /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
                             echo '================= Build Project With Sonar Completed ==================='
 
 
