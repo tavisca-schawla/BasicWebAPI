@@ -17,6 +17,13 @@ pipeline{
                         powershell "dotnet restore $SOLUTION_FILE_PATH --source https://api.nuget.org/v3/index.json"
                         powershell "echo '================= Restore Project Completed ==================='"
 
+			powershell "echo '================= Build Project With Sonar Started ====================='"
+                        powershell "dotnet $install_directory/SonarScanner.MSBuild.dll begin /k:"webapiproject" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5"
+			powershell "dotnet build $SOLUTION_FILE_PATH"
+			powershell "dotnet $install_directory/SonarScanner.MSBuild.dll end /d:sonar.login="ce6fe1b52319876013325c06668afa4d2e5763c5""
+                        powershell "echo '================= Build Project With Sonar Completed ==================='"
+
+
                         powershell "echo '================= Build Project Started ====================='"
                         powershell "dotnet build $SOLUTION_FILE_PATH -p:Configuration=release -v:n"
                         powershell "echo '================= Build Project Completed ==================='"
